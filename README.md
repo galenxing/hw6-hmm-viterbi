@@ -1,5 +1,5 @@
 ![BuildStatus](https://github.com/galenxing/hw6-hmm-viterbi/actions/workflows/main.yml/badge.svg?)
-[![Documentation Status](https://readthedocs.org/projects/hw6-hmm-viterbi/badge/?version=latest)](https://hw6-hmm-viterbi.readthedocs.io/en/latest/?badge=latest)
+[![Documentation Status](https://readthedocs.org/projects/hw6-hmm-viterbi-gx/badge/?version=latest)](https://hw6-hmm-viterbi-gx.readthedocs.io/en/latest/?badge=latest)
 
 # Lab 6: Inferring CRE Selection Strategies from Chromatin Regulatory State Observations using a Hidden Markov Model and the Viterbi Algorithm
 
