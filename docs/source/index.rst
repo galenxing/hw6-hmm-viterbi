@@ -26,9 +26,15 @@ Please evaluate the project deliverable and briefly answer the following specula
 
 1. Speculate how the progenitor cardiomyocyte Hidden Markov Model and primitive cardiomyocyte regulatory observations and inferred hidden states might change if the model design's sliding window (default set to 60 kilobases) were to increase or decrease?
 
+If you increase the sliding window you might be adding too much extraneous information. Thus it would introduce more noise and could lead to less accurate results. Similarly if you descreased the sliding window too much you might not have enough data to make proper inferences. 
+
 2. How would you recommend integrating additional genomics data (i.e., histone and transcription factor ChIP-seq data) to update or revise the progenitor cardiomyocyte Hidden Markov Model? In your updated/revised model, how would you define the observation and hidden states, and the prior, transition, and emission probabilities? Using the updated/revised design, what new testable hypotheses would you be able to evaluate and/or disprove?
 
+If you were to integrate more data, you would need to recalculate the prior, transition, and emission probabilities. I would do this by running a model on the before and after integration and see if the addition of data improved the hidden state prediction. You should also use your priors about TF biology in order to determine whether or use more or less data.
+
 3. Following functional characterization (i.e., MPRA or CRISPRi/a) of progenitor and primitive cardiomyocytes, consider all possible scenarios for recommending how to update or revise our genomic annotation for *cis*-candidate regulatory elements (cCREs) and candidate regulatory elements (CREs)?
+
+You should have a probabilistic bar for what is and isnt a cCRE or a CRE. Then following new data and running optimizations to your model (e.g. playing around with parameters usch as the window sizes) you can then determine what regions to classify as cCRE and CRE based on the stability of the predictions. These should then be compared with the new functional characterization and if it matches, then you can update your genomic annotation. 
 
 
 Models Package 
