@@ -12,7 +12,8 @@ from models.decoders import ViterbiAlgorithm
 
 
 def test_use_case_lecture():
-    """_summary_
+    """
+    User test for a lexture use case.
     """
     # index annotation observation_states=[i,j]    
     observation_states = ['committed','ambivalent'] # A graduate student's dedication to their rotation lab
@@ -50,7 +51,8 @@ def test_use_case_lecture():
 
 
 def test_user_case_one():
-    """_summary_
+    """
+    Test for a traffic/no-traffic use case
     """
     # index annotation observation_states=[i,j]    
     observation_states = ['on-time','late'] 
@@ -89,7 +91,8 @@ def test_user_case_one():
 
 
 def test_user_case_two():
-    """_summary_
+    """
+    Test for a hungry vs full given if the hidden state was no-food or ate_food
     """
      # index annotation observation_states=[i,j]    
     observation_states = ['hungry','full'] 
@@ -128,7 +131,8 @@ def test_user_case_two():
 
 
 def test_user_case_three():
-    """_summary_
+    """
+    Test for the user if they were tired or awake given sleep vs no-sleep hidden states.
     """
      # index annotation observation_states=[i,j]    
     observation_states = ['tired','awake'] 
