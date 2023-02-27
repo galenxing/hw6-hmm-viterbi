@@ -21,40 +21,52 @@ class ViterbiAlgorithm:
         Returns:
             np.ndarray: _description_
         """        
+        # list of our observations
+        Y = decode_observation_states
         
-        # Initialize path (i.e., np.arrays) to store the hidden sequence states returning the maximum probability
-        path = np.zeros((len(decode_observation_states), 
-                         len(self.hmm_object.hidden_states)))
-        path[0,:] = [hidden_state_index for hidden_state_index in range(len(self.hmm_object.hidden_states))]
+        # initialize variables
+        o = self.hmm_object.observation_states
+        s = self.hmm_object.hidden_states
+        pi = self.hmm_object.prior_probabilities
+        a = self.hmm_object.transition_probabilities
+        b = self.hmm_object.emission_probabilities
 
-        best_path = np.zeros((len(decode_observation_states), 
-                         len(self.hmm_object.hidden_states)))        
+        obs_dict = self.hmm_object.observation_states_dict
+        state_dict = self.hmm_object.hidden_states_dict
+
+        # k is the number of states
+        # t is the number of observations we have
+        k = len(s)
+        t = len(Y)
         
-        # Compute initial delta:
-        # 1. Calculate the product of the prior and emission probabilities. This will be used to decode the first observation state.
-        # 2. Scale      
-        delta = np.multiply()
+        # T1 to keep track of the probabilities in each prior stats
+        # T2 to track the pointer to the best prior state
+        T1 = np.zeros((k,t))
+        T2 = np.zeros((k,t))
 
-        # For each observation state to decode, select the hidden state sequence with the highest probability (i.e., Viterbi trellis)
-        for trellis_node in range(1, len(decode_observation_states)):
+        # initialize hidden probabilities for each state at t0
+        for i in range(k):
+            obs_idx = obs_dict[Y[0]]
+            T1[i,0] = pi[i] * b[i,obs_idx]
+            T2[i,0] = 0
 
-            # TODO: comment the initialization, recursion, and termination steps
+        # iterate through all the states and observations
+        for j in range(1,t):
+            for i in range(k):
+                obs_idx = obs_dict[Y[j]]
+                T1[i,j] = np.max(T1[:, j-1] * a[:,i] * b[i,obs_idx])
+                T2[i,j] = np.argmax(T1[:, j-1] * a[:,i] * b[i,obs_idx])
 
-            product_of_delta_and_transition_emission =  np.multiply()
+        z = np.zeros(t)
+        x = [''] * t
+
+        z[t-1] = np.int(np.argmax(T1[:,t-1]))
+        x[t-1] = s[int(z[t-1])]
+        
+        # backtrack from last obs
+        for j in range(t-1, 0, -1):
+            i = int(z[j])
+            z[j-1] = T2[i,j]
+            x[j-1] = s[int(z[j-1])]
             
-            # Update delta and scale
-
-            # Select the hidden state sequence with the maximum probability
-
-            # Update best path
-            for hidden_state in range(len(self.hmm_object.hidden_states)):
-            
-            # Set best hidden state sequence in the best_path np.ndarray THEN copy the best_path to path
-
-            path = best_path.copy()
-
-        # Select the last hidden state, given the best path (i.e., maximum probability)
-
-        best_hidden_state_path = np.array([])
-
-        return best_hidden_state_path
+        return x
