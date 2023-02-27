@@ -2,13 +2,15 @@ import copy
 import numpy as np
 class ViterbiAlgorithm:
     """ViterbiAlgorithm Class
+    
+    This will calculate the best hidden state sequence for a HiddenMarkovModel and its observed states
     """    
 
     def __init__(self, hmm_object):
         """Initializes ViterbiAlgorithm to calcuale the best hidden state sequence.
 
         Args:
-            hmm_object (_type_): _description_
+            hmm_object (HiddenMarkovModel): An object of type HiddenMarkovModel
         """              
         self.hmm_object = hmm_object
 
