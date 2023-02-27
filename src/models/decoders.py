@@ -1,11 +1,11 @@
 import copy
 import numpy as np
 class ViterbiAlgorithm:
-    """_summary_
+    """ViterbiAlgorithm Class
     """    
 
     def __init__(self, hmm_object):
-        """_summary_
+        """Initializes ViterbiAlgorithm to calcuale the best hidden state sequence.
 
         Args:
             hmm_object (_type_): _description_
@@ -13,13 +13,13 @@ class ViterbiAlgorithm:
         self.hmm_object = hmm_object
 
     def best_hidden_state_sequence(self, decode_observation_states: np.ndarray) -> np.ndarray:
-        """_summary_
+        """Returns the best hidden state sequence given a list of observations
 
         Args:
-            decode_observation_states (np.ndarray): _description_
+            decode_observation_states (np.ndarray): a list of observations in order to decode the hidden state for
 
         Returns:
-            np.ndarray: _description_
+            np.ndarray: an array with the hidden states most likely for generating the observations
         """        
         # list of our observations
         Y = decode_observation_states
@@ -60,7 +60,7 @@ class ViterbiAlgorithm:
         z = np.zeros(t)
         x = [''] * t
 
-        z[t-1] = np.int(np.argmax(T1[:,t-1]))
+        z[t-1] = np.argmax(T1[:,t-1])
         x[t-1] = s[int(z[t-1])]
         
         # backtrack from last obs
