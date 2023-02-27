@@ -82,6 +82,7 @@ def test_user_case_one():
 
     # TODO: Check HMM dimensions and ViterbiAlgorithm
     
+    
     # Find the best hidden state path for our observation states
     use_case_decoded_hidden_states = use_case_one_viterbi.best_hidden_state_sequence(use_case_one_data['observation_states'])
     assert np.alltrue(use_case_decoded_hidden_states == use_case_one_data['hidden_states'])
@@ -90,10 +91,75 @@ def test_user_case_one():
 def test_user_case_two():
     """_summary_
     """
-    # TODO
+     # index annotation observation_states=[i,j]    
+    observation_states = ['hungry','full'] 
+
+    # index annotation hidden_states=[i,j]
+    hidden_states = ['no-food','ate_food']
+
+    use_case_one_data = np.load('./data/UserCase-Two.npz')
+
+    # Instantiate submodule class models.HiddenMarkovModel with
+    # observation and hidden states and prior, transition, and emission probabilities.
+    use_case_one_hmm = HiddenMarkovModel(observation_states,
+                                         hidden_states,
+                      use_case_one_data['prior_probabilities'], # prior probabilities of hidden states in the order specified in the hidden_states list
+                      use_case_one_data['transition_probabilities'], # transition_probabilities[:,hidden_states[i]]
+                      use_case_one_data['emission_probabilities']) # emission_probabilities[hidden_states[i],:][:,observation_states[j]]
+    
+    # Instantiate submodule class models.ViterbiAlgorithm using the use case one HMM 
+    use_case_one_viterbi = ViterbiAlgorithm(use_case_one_hmm)
+
+     # Check if use case one HiddenMarkovAlgorithm instance is inherited in the subsequent ViterbiAlgorithm instance
+    assert use_case_one_viterbi.hmm_object.observation_states == use_case_one_hmm.observation_states
+    assert use_case_one_viterbi.hmm_object.hidden_states == use_case_one_hmm.hidden_states
+
+    assert np.allclose(use_case_one_viterbi.hmm_object.prior_probabilities, use_case_one_hmm.prior_probabilities)
+    assert np.allclose(use_case_one_viterbi.hmm_object.transition_probabilities, use_case_one_hmm.transition_probabilities)
+    assert np.allclose(use_case_one_viterbi.hmm_object.emission_probabilities, use_case_one_hmm.emission_probabilities)
+
+    # TODO: Check HMM dimensions and ViterbiAlgorithm
+    
+    # Find the best hidden state path for our observation states
+    use_case_decoded_hidden_states = use_case_one_viterbi.best_hidden_state_sequence(use_case_one_data['observation_states'])
+    assert np.alltrue(use_case_decoded_hidden_states == use_case_one_data['hidden_states'])
+
+
 
 
 def test_user_case_three():
     """_summary_
     """
-    # TODO
+     # index annotation observation_states=[i,j]    
+    observation_states = ['tired','awake'] 
+
+    # index annotation hidden_states=[i,j]
+    hidden_states = ['sleep','no-sleep']
+
+    use_case_one_data = np.load('./data/UserCase-three.npz')
+
+    # Instantiate submodule class models.HiddenMarkovModel with
+    # observation and hidden states and prior, transition, and emission probabilities.
+    use_case_one_hmm = HiddenMarkovModel(observation_states,
+                                         hidden_states,
+                      use_case_one_data['prior_probabilities'], # prior probabilities of hidden states in the order specified in the hidden_states list
+                      use_case_one_data['transition_probabilities'], # transition_probabilities[:,hidden_states[i]]
+                      use_case_one_data['emission_probabilities']) # emission_probabilities[hidden_states[i],:][:,observation_states[j]]
+    
+    # Instantiate submodule class models.ViterbiAlgorithm using the use case one HMM 
+    use_case_one_viterbi = ViterbiAlgorithm(use_case_one_hmm)
+
+     # Check if use case one HiddenMarkovAlgorithm instance is inherited in the subsequent ViterbiAlgorithm instance
+    assert use_case_one_viterbi.hmm_object.observation_states == use_case_one_hmm.observation_states
+    assert use_case_one_viterbi.hmm_object.hidden_states == use_case_one_hmm.hidden_states
+
+    assert np.allclose(use_case_one_viterbi.hmm_object.prior_probabilities, use_case_one_hmm.prior_probabilities)
+    assert np.allclose(use_case_one_viterbi.hmm_object.transition_probabilities, use_case_one_hmm.transition_probabilities)
+    assert np.allclose(use_case_one_viterbi.hmm_object.emission_probabilities, use_case_one_hmm.emission_probabilities)
+
+    # TODO: Check HMM dimensions and ViterbiAlgorithm
+    
+    # Find the best hidden state path for our observation states
+    use_case_decoded_hidden_states = use_case_one_viterbi.best_hidden_state_sequence(use_case_one_data['observation_states'])
+    assert np.alltrue(use_case_decoded_hidden_states == use_case_one_data['hidden_states'])
+

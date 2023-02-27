@@ -37,7 +37,7 @@ def test_deliverable():
     evaluate_viterbi_decoder_using_observation_states_of_prog_cm = prog_cm_viterbi_instance.best_hidden_state_sequence(prog_cm_data['observation_states'])
     
     # Evaluate the accuracy of using the progenitor cardiomyocyte HMM and Viterbi algorithm to decode the progenitor CM's CRE selection strategies
-    # NOTE: Model is expected to perform with 80% accuracy
+    # NOTE: Model is expected to perform with 60% accuracy (changed based on slack messages)
     assert np.sum(prog_cm_data['hidden_states'] == evaluate_viterbi_decoder_using_observation_states_of_prog_cm)/len(prog_cm_data['observation_states']) == 0.6
 
     ### Evaluate Primitive Cardiomyocyte Regulatory Observation Sequence ###
